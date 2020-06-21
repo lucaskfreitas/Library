@@ -12,5 +12,6 @@
         <file>images/home.jpg</file>
         <file>images/icon.ico</file>
         <file>CustomTextField.qml</file>
+        <file>sql-scripts/db-schema.sql</file>
     </qresource>
 </RCC>

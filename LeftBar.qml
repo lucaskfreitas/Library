@@ -19,7 +19,7 @@ Rectangle {
             Layout.alignment: Qt.AlignTop
             Layout.bottomMargin: 20
 
-            source: "images/home-button.jpg"
+            source: "qrc:///images/home-button.jpg"
             sourceSize.width: imgLogo.width
             fillMode: Image.PreserveAspectFit
 

@@ -3,13 +3,14 @@
 
 #include <QGuiApplication>
 
-const QString DRIVER("QSQLITE");
-
 class DatabaseManager
 {
     public:
         DatabaseManager();
-        void teste2();
+        void VerifyDatabase();
+
+    private:
+        void CreateDatabaseSchema();
 };
 
 #endif // DATABASEMANAGER_H

@@ -2,26 +2,51 @@
 #include <QQmlApplicationEngine>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QFile>
 
 DatabaseManager::DatabaseManager()
 {
-    if(QSqlDatabase::isDriverAvailable(DRIVER))
-    {
-        QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
-
-        db.setDatabaseName("C:\\Users\\Kaminski\\Workspace\\BibliotecaKaminskiFreitas\\t.sqlite");
-
-        if(!db.open())
-            qWarning() << "MainWindow::DatabaseConnect - ERROR: " << db.lastError().text();
-    }
-    else
-        qWarning() << "MainWindow::DatabaseConnect - ERROR: no driver " << DRIVER << " available";
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("C:\\Users\\Kaminski\\Workspace\\QtProjects\\t.sqlite");
+    if(!db.open())
+        qWarning() << "Error connecting to the Database:" << db.lastError().text();
 }
 
-void DatabaseManager::teste2()
+void DatabaseManager::VerifyDatabase()
 {
-    QSqlQuery query("CREATE TABLE people (id INTEGER PRIMARY KEY, name TEXT)");
+    QSqlQuery query("pragma user_version");
+    query.next();
+    int iUserVersion = query.value(0).toInt();
 
-    if(!query.isActive())
-        qWarning() << "MainWindow::DatabaseInit - ERROR: " << query.lastError().text();
+    if (iUserVersion == 0)
+    {
+        CreateDatabaseSchema();
+    }
+    else
+        qDebug() << "Database already up to date!";
+
+}
+
+void DatabaseManager::CreateDatabaseSchema()
+{
+    QFile fScript(":/sql-scripts/db-schema.sql");
+    if (!fScript.open(QIODevice::ReadOnly))
+    {
+        qWarning() << "Error opening db-schema script file:" << fScript.errorString();
+        return;
+    }
+
+    QSqlQuery query;
+
+    QStringList lsCommands = QTextStream(&fScript).readAll().split(';');
+    foreach (QString sCommand, lsCommands)
+    {
+        if (!sCommand.trimmed().isEmpty() && !query.exec(sCommand))
+        {
+            qWarning() << "Error executing query at method DatabaseManager::CreateDatabaseSchema:" << query.lastError();
+            return;
+        }
+    }
+
+    qDebug() << "Database successfully created!";
 }

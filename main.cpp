@@ -17,8 +17,8 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    //DatabaseManager teste;
-    //teste.teste2();
+    DatabaseManager dbManager;
+    dbManager.VerifyDatabase();
 
     return app.exec();
 }

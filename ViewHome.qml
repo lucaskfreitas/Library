@@ -7,7 +7,7 @@ Rectangle {
         id: imgHome
         anchors.margins: 50
         anchors.fill: parent
-        source: "images/home.jpg"
+        source: "qrc:///images/home.jpg"
         fillMode: Image.PreserveAspectFit
     }
 }
