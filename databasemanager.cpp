@@ -4,10 +4,10 @@
 #include <QSqlQuery>
 #include <QFile>
 
-DatabaseManager::DatabaseManager()
+DatabaseManager::DatabaseManager(QString aDatabasePath)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:\\Users\\Kaminski\\Workspace\\QtProjects\\t.sqlite");
+    db.setDatabaseName(aDatabasePath);
     if(!db.open())
         qWarning() << "Error connecting to the Database:" << db.lastError().text();
 }

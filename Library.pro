@@ -14,13 +14,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        configurations.cpp \
         databasemanager.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
 RESOURCES += qtquickcontrols2.conf
 
-QT += sql
+QT += sql widgets
 
 RC_ICONS = images/icon.ico
 
@@ -36,4 +37,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    configurations.h \
     databasemanager.h

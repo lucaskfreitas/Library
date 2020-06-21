@@ -6,7 +6,7 @@
 class DatabaseManager
 {
     public:
-        DatabaseManager();
+        DatabaseManager(QString aDatabasePath);
         void VerifyDatabase();
 
     private:
