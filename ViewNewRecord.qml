@@ -49,7 +49,7 @@ Item {
                         text: "Autor"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
                         placeholderText: "Insira o autor (SOBRENOME, Nome) - separar com ponto e vírgula caso houver mais do que um"
                     }
@@ -65,7 +65,7 @@ Item {
                         text: "Título"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
                         placeholderText: "Insira o título completo"
                     }
@@ -81,7 +81,7 @@ Item {
                         text: "Cidade"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
                         placeholderText: "Insira a cidade da editora ou instituição"
                     }
@@ -97,7 +97,7 @@ Item {
                         text: "Editora"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
                         placeholderText: "Insira a editora ou instituição - separar com ponto e vírgula caso houver mais do que uma"
                     }
@@ -113,7 +113,7 @@ Item {
                         text: "Data"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
                         placeholderText: "Insira a data de publicação"
                         inputMask: "99/99/9999;_"
@@ -127,8 +127,9 @@ Item {
                         text: "Nº de páginas"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
+                        validator: IntValidator{}
                         placeholderText: "Insira o número total de páginas"
                     }
                 }
@@ -143,7 +144,7 @@ Item {
                         text: "Volume"
                     }
 
-                    TextField {
+                    CustomTextField {
                         id: txtVolume
                         Layout.fillWidth: true
                         placeholderText: "Insira o volume (para publicações periódicas)"
@@ -157,8 +158,9 @@ Item {
                         text: "Número"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
+                        validator: IntValidator{}
                         placeholderText: "Insira o número (para publicações periódicas)"
                     }
                 }
@@ -173,7 +175,7 @@ Item {
                         text: "Coleção ou série"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
                         placeholderText: "Insira o título da coleção ou série, se for o caso"
                     }
@@ -190,7 +192,7 @@ Item {
                         text: "Número de chamada"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
                         placeholderText: "Insira o número de chamada (para catálogo sistemático)"
                     }
@@ -206,7 +208,7 @@ Item {
                         text: "Assuntos"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
                         placeholderText: "Insira os assuntos, separados por ponto e vírgula"
                     }
@@ -235,8 +237,9 @@ Item {
                         text: "Exemplares"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
+                        validator: IntValidator{}
                         placeholderText: "Insira o número de exemplares"
                     }
                 }
@@ -251,7 +254,7 @@ Item {
                         text: "Observação"
                     }
 
-                    TextField {
+                    CustomTextField {
                         Layout.fillWidth: true
                         placeholderText: "Insira uma observação"
                     }
@@ -266,7 +269,7 @@ Item {
                         text: "Emprestado"
                     }
 
-                    TextField {
+                    CustomTextField {
                         id: edBorrowedToWhom
                         visible: ckBorrowedItem.checked
                         Layout.fillWidth: true

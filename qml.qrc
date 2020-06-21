@@ -11,5 +11,6 @@
         <file>images/home-button.jpg</file>
         <file>images/home.jpg</file>
         <file>images/icon.ico</file>
+        <file>CustomTextField.qml</file>
     </qresource>
 </RCC>

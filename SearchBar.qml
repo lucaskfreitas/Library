@@ -28,10 +28,12 @@ Rectangle {
             model: [ "Todos os campos", "Título", "Assunto", "Autor", "Coleção ou série" ]
         }
 
-        TextField {
+        CustomTextField {
             Layout.preferredHeight: 30
             Layout.fillWidth: true
             placeholderText: "Digite aqui a sua busca..."
+
+            Keys.onEnterPressed: contentFrame.currentIndex = 1
         }
 
         Button {
