@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>images/magnifying-glass.png</file>
+        <file>ViewCriacaoRegistro.qml</file>
+        <file>Styles.qml</file>
+        <file>BarraSuperior.qml</file>
+        <file>BarraLateral.qml</file>
+        <file>ViewPaginaInicial.qml</file>
+        <file>images/home-button.jpg</file>
+        <file>images/home.jpg</file>
+        <file>images/icon.ico</file>
+    </qresource>
+</RCC>
