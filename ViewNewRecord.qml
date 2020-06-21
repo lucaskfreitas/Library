@@ -28,7 +28,7 @@ Item {
 
                     Text {
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Tipo"
                     }
@@ -44,7 +44,7 @@ Item {
 
                     Text {
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Autor"
                     }
@@ -60,7 +60,7 @@ Item {
 
                     Text {
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Título"
                     }
@@ -76,7 +76,7 @@ Item {
 
                     Text {
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Cidade"
                     }
@@ -92,7 +92,7 @@ Item {
 
                     Text {
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Editora"
                     }
@@ -108,7 +108,7 @@ Item {
 
                     Text {
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Data"
                     }
@@ -122,7 +122,7 @@ Item {
                     Text {
                         Layout.leftMargin: 50
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Nº de páginas"
                     }
@@ -138,13 +138,13 @@ Item {
 
                     Text {
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Volume"
                     }
 
                     TextField {
-                        id: txVolume
+                        id: txtVolume
                         Layout.fillWidth: true
                         placeholderText: "Insira o volume (para publicações periódicas)"
                     }
@@ -152,7 +152,7 @@ Item {
                     Text {
                         Layout.leftMargin: 50
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Número"
                     }
@@ -168,7 +168,7 @@ Item {
 
                     Text {
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Coleção ou série"
                     }
@@ -183,7 +183,7 @@ Item {
                     spacing: 10
 
                     Text {
-                        id: txNumeroChamada
+                        id: txtReferenceNumber
                         verticalAlignment: Text.AlignVCenter
                         Layout.preferredWidth: 120
                         font: styles.mainFont
@@ -201,7 +201,7 @@ Item {
 
                     Text {
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Assuntos"
                     }
@@ -217,20 +217,20 @@ Item {
 
                     Text {
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Língua"
                     }
 
                     ComboBox {
-                        Layout.preferredWidth: txVolume.width
+                        Layout.preferredWidth: txtVolume.width
                         model: [ "Português", "Inglês", "Espanhol", "Francês", "Outros" ]
                     }
 
                     Text {
                         Layout.leftMargin: 50
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Exemplares"
                     }
@@ -246,7 +246,7 @@ Item {
 
                     Text {
                         verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: txNumeroChamada.width
+                        Layout.preferredWidth: txtReferenceNumber.width
                         font: styles.mainFont
                         text: "Observação"
                     }
@@ -261,14 +261,14 @@ Item {
                     spacing: 10
 
                     CheckBox {
-                        id: ckItemEmprestado
-                        Layout.preferredWidth: txNumeroChamada.width
+                        id: ckBorrowedItem
+                        Layout.preferredWidth: txtReferenceNumber.width
                         text: "Emprestado"
                     }
 
                     TextField {
-                        id: edEmprestadoParaQuem
-                        visible: ckItemEmprestado.checked
+                        id: edBorrowedToWhom
+                        visible: ckBorrowedItem.checked
                         Layout.fillWidth: true
                         placeholderText: "Para quem?"
                     }

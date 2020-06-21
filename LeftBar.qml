@@ -8,7 +8,7 @@ Rectangle {
     Layout.fillHeight: true
 
     ColumnLayout {
-        id: barraLateral
+        id: leftBar
         anchors.fill: parent
         anchors.margins: 30
         spacing: 20
@@ -31,7 +31,7 @@ Rectangle {
         }
 
         Button {
-            id: btCriarRegistro
+            id: btNewRecord
             Layout.alignment: Qt.AlignCenter
             Layout.preferredHeight: 50
             Layout.fillWidth: true
@@ -41,7 +41,7 @@ Rectangle {
         }
 
         Button {
-            id: btRelatorios
+            id: btReports
             Layout.alignment: Qt.AlignCenter
             Layout.preferredHeight: 50
             Layout.fillWidth: true

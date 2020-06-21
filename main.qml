@@ -6,7 +6,7 @@ import QtQuick.Controls 2.5
 Window {
     visible: true
     width: 1270
-    height: 700
+    height: 800
     title: qsTr("Biblioteca Kaminski e Freitas")
 
     Styles {
@@ -21,13 +21,13 @@ Window {
             anchors.fill: parent
             spacing: 1
 
-            BarraLateral {
+            LeftBar {
             }
 
             ColumnLayout {
                 spacing: 1
 
-                BarraSuperior {
+                SearchBar {
                 }
 
                 SwipeView {
@@ -37,27 +37,27 @@ Window {
                     Component.onCompleted: contentItem.interactive = false
                     clip: true
 
-                    ViewPaginaInicial {
+                    ViewHome {
                     }
 
                     Rectangle {
                         color: "white"
 
                         Text {
-                            id: textBusca
+                            id: txtSearch
                             anchors.centerIn: parent
                             text: qsTr("RESULTADOS DA BUSCA")
                         }
                     }
 
-                    ViewCriacaoRegistro {
+                    ViewNewRecord {
                     }
 
                     Rectangle {
                         color: "white"
 
                         Text {
-                            id: textRelatorio
+                            id: txtReports
                             anchors.centerIn: parent
                             text: qsTr("RELATÓRIOS")
                         }

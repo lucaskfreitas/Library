@@ -21,7 +21,7 @@ Rectangle {
         }
 
         ComboBox {
-            id: cbTipoBusca
+            id: cbSearchBy
             Layout.preferredHeight: 30
             Layout.preferredWidth: 150
             Layout.alignment: Qt.AlignCenter
@@ -35,7 +35,7 @@ Rectangle {
         }
 
         Button {
-            id: btBuscar
+            id: btSearch
             Layout.preferredHeight: 30
             Layout.preferredWidth: 30
             icon.source: 'qrc:///images/magnifying-glass.png'
@@ -43,7 +43,7 @@ Rectangle {
         }
 
         Button {
-            id: btLimpar
+            id: btClear
             Layout.preferredHeight: 30
             Layout.preferredWidth: 60
             Layout.rightMargin: 30
