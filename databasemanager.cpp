@@ -6,10 +6,15 @@
 
 DatabaseManager::DatabaseManager(QString aDatabasePath)
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(aDatabasePath);
-    if(!db.open())
-        qWarning() << "Error connecting to the Database:" << db.lastError().text();
+    if (!aDatabasePath.isEmpty())
+    {
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName(aDatabasePath);
+        if(!db.open())
+            qWarning() << "Error connecting to the Database:" << db.lastError().text();
+    }
+    else
+        qWarning() << "No database path was informed!";
 }
 
 void DatabaseManager::VerifyDatabase()

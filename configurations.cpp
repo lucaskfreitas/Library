@@ -8,54 +8,99 @@
 
 QString Configurations::GetDBPath()
 {
-    QString sDBPath;
+    QString sDBPath = ReadVariable("paths.conf", "DB_PATH");
 
-    QFile* fConfig = GetConfigFile();
-    if (fConfig->open(QIODevice::ReadWrite))
+    if (!sDBPath.isEmpty() && !QFile::exists(sDBPath)) //Invalid path
     {
-        while (!fConfig->atEnd())
-        {
-            QString sConfigLine = fConfig->readLine();
-
-            if (sConfigLine.contains("DB_PATH"))
-            {
-                sDBPath = sConfigLine.split('=')[1].trimmed();
-                break;
-            }
-        }
-
-        if (sDBPath.isEmpty())
-        {
-            sDBPath = AskForDBPath();
-            QTextStream stream(fConfig);
-            stream << "DB_PATH = " << sDBPath << Qt::endl;
-        }
-
-        fConfig->close();
+        sDBPath = "";
+        RemoveVariable("paths.conf", "DB_PATH");
     }
-    else
-        qWarning() << "Error opening paths.conf:" << fConfig->errorString();
+
+    if (sDBPath.isEmpty())
+    {
+        sDBPath = AskForDBPath();
+
+        if (!sDBPath.isEmpty())
+            WriteVariable("paths.conf", "DB_PATH", sDBPath);
+    }
 
     return sDBPath;
 }
 
-QFile* Configurations::GetConfigFile()
+QFile* Configurations::GetConfigFile(QString aFilename)
 {
     QString sAppDataDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
     QDir dir(sAppDataDir);
     if (!dir.exists())
         dir.mkpath(sAppDataDir);
 
-    return new QFile(sAppDataDir + "/paths.conf");
+    return new QFile(sAppDataDir + "/" + aFilename);
 }
 
 QString Configurations::AskForDBPath()
 {
     QFileDialog dialog;
-    dialog.setFileMode(QFileDialog::DirectoryOnly);
-    dialog.setOption(QFileDialog::ShowDirsOnly);
+    QString sSelectedFile = dialog.getSaveFileName(nullptr,
+                                                   "Selecione o caminho do banco de dados...",
+                                                   "db.sqlite",
+                                                   "SQLITE database file (*.sqlite)",
+                                                   nullptr,
+                                                   QFileDialog::DontConfirmOverwrite);
 
-    dialog.exec();
+    if (!sSelectedFile.isEmpty() && !sSelectedFile.contains(".sqlite"))
+        sSelectedFile += ".sqlite";
 
-    return dialog.directory().path() + "/db.sqlite";
+    return sSelectedFile;
+}
+
+QString Configurations::ReadVariable(QString aFilename, QString aVariableName)
+{
+    QString sResult = "";
+
+    QFile* fConfig = GetConfigFile(aFilename);
+    if (fConfig->open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        while (!fConfig->atEnd())
+        {
+            QString sConfigLine = fConfig->readLine();
+            if (sConfigLine.contains(aVariableName))
+                sResult = sConfigLine.split('=')[1].trimmed();
+        }
+
+        fConfig->close();
+    }
+
+    return sResult;
+}
+
+void Configurations::WriteVariable(QString aFilename, QString aVariableName, QString aValue)
+{
+    QFile* fConfig = GetConfigFile(aFilename);
+    if (fConfig->open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream oStream(fConfig);
+        oStream << aVariableName << "=" << aValue << Qt::endl;
+        fConfig->close();
+    }
+}
+
+void Configurations::RemoveVariable(QString aFilename, QString aVariableName)
+{
+    QFile* fConfig = GetConfigFile(aFilename);
+    if (fConfig->open(QIODevice::ReadWrite | QIODevice::Text))
+    {
+        QTextStream oStream(fConfig);
+        QString sNewFileContents = "";
+
+        while (!fConfig->atEnd())
+        {
+            QString sConfigLine = fConfig->readLine();
+            if(!sConfigLine.contains(aVariableName))
+                sNewFileContents.append(sConfigLine + "\n");
+        }
+
+        fConfig->resize(0);
+        oStream << sNewFileContents;
+        fConfig->close();
+    }
 }
