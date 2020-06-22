@@ -1,10 +1,11 @@
 #include "databasemanager.h"
+
 #include <QQmlApplicationEngine>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QFile>
 
-DatabaseManager::DatabaseManager(QString aDatabasePath)
+void DatabaseManager::Connect(QString aDatabasePath)
 {
     if (!aDatabasePath.isEmpty())
     {
@@ -29,7 +30,6 @@ void DatabaseManager::VerifyDatabase()
     }
     else
         qDebug() << "Database already up to date!";
-
 }
 
 void DatabaseManager::CreateDatabaseSchema()

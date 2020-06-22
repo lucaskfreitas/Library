@@ -2,50 +2,50 @@ pragma user_version = 1;
 
 create table person
 (
-    id integer primary key,
+    id integer primary key autoincrement,
     is_author boolean,
     name nvarchar(100)
 );
 
 create table city
 (
-    id integer primary key,
+    id integer primary key autoincrement,
     name nvarchar(100)
 );
 
 create table publisher
 (
-    id integer primary key,
+    id integer primary key autoincrement,
     name nvarchar(100)
 );
 
 create table collection
 (
-    id integer primary key,
+    id integer primary key autoincrement,
     name nvarchar(100)
 );
 
 create table subject
 (
-    id integer primary key,
+    id integer primary key autoincrement,
     name nvarchar(100)
 );
 
 create table language
 (
-    id integer primary key,
+    id integer primary key autoincrement,
     name nvarchar(100)
 );
 
 create table record_type
 (
-    id integer primary key,
+    id integer primary key autoincrement,
     name nvarchar(100)
 );
 
 create table record
 (
-    id integer primary key,
+    id integer primary key autoincrement,
     title nvarchar(100),
     type_id integer,
     date timestamp,

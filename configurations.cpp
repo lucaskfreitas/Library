@@ -1,4 +1,5 @@
 #include "configurations.h"
+
 #include <QQmlApplicationEngine>
 #include <QGuiApplication>
 #include <QStandardPaths>

@@ -2,10 +2,11 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5
+import org.database 1.0
 
 Item {
-    Styles {
-        id: styles
+    DbRecord {
+        id: record
     }
 
     Rectangle {
@@ -60,8 +61,10 @@ Item {
                 }
 
                 CustomTextField {
+                    id: edTitle
                     Layout.fillWidth: true
                     placeholderText: "Insira o título completo"
+                    onTextChanged: record.title = edTitle.text
                 }
             }
 
@@ -122,9 +125,11 @@ Item {
                 }
 
                 CustomTextField {
+                    id: edNumPages
                     Layout.fillWidth: true
                     validator: IntValidator{}
                     placeholderText: "Insira o número total de páginas"
+                    onTextChanged: record.numPages = edNumPages.text
                 }
             }
 
@@ -136,12 +141,14 @@ Item {
                     Layout.preferredWidth: txtReferenceNumber.width
                     font: styles.mainFont
                     text: "Volume"
+
                 }
 
                 CustomTextField {
-                    id: txtVolume
+                    id: edVolume
                     Layout.fillWidth: true
                     placeholderText: "Insira o volume (para publicações periódicas)"
+                    onTextChanged: record.volume = edVolume.text
                 }
 
                 Text {
@@ -153,9 +160,11 @@ Item {
                 }
 
                 CustomTextField {
+                    id: edNumber
                     Layout.fillWidth: true
                     validator: IntValidator{}
                     placeholderText: "Insira o número (para publicações periódicas)"
+                    onTextChanged: record.number = edNumber.text
                 }
             }
 
@@ -219,7 +228,7 @@ Item {
                 }
 
                 ComboBox {
-                    Layout.preferredWidth: txtVolume.width
+                    Layout.preferredWidth: edVolume.width
                     model: [ "Português", "Inglês", "Espanhol", "Francês", "Outros" ]
                 }
 
@@ -281,6 +290,7 @@ Item {
                 Button {
                     Layout.preferredWidth: 70
                     text: "Salvar"
+                    onClicked: record.save()
                 }
 
                 Button {
