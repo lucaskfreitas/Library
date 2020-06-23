@@ -5,12 +5,12 @@
 
 class DatabaseManager
 {
-public:
-    static void Connect(QString aDatabasePath);
-    static void VerifyDatabase();
+    public:
+        static void connect(const QString databasePath);
+        static void verifyDatabase();
 
-private:
-    static void CreateDatabaseSchema();
+    private:
+        static void createDatabaseSchema();
 };
 
 #endif // DATABASEMANAGER_H

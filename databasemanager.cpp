@@ -5,12 +5,12 @@
 #include <QSqlQuery>
 #include <QFile>
 
-void DatabaseManager::Connect(QString aDatabasePath)
+void DatabaseManager::connect(const QString databasePath)
 {
-    if (!aDatabasePath.isEmpty())
+    if (!databasePath.isEmpty())
     {
         QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName(aDatabasePath);
+        db.setDatabaseName(databasePath);
         if(!db.open())
             qWarning() << "Error connecting to the Database:" << db.lastError().text();
     }
@@ -18,35 +18,35 @@ void DatabaseManager::Connect(QString aDatabasePath)
         qWarning() << "No database path was informed!";
 }
 
-void DatabaseManager::VerifyDatabase()
+void DatabaseManager::verifyDatabase()
 {
     QSqlQuery query("pragma user_version");
     query.next();
-    int iUserVersion = query.value(0).toInt();
+    int databaseVersion = query.value(0).toInt();
 
-    if (iUserVersion == 0)
+    if (databaseVersion == 0)
     {
-        CreateDatabaseSchema();
+        createDatabaseSchema();
     }
     else
         qDebug() << "Database already up to date!";
 }
 
-void DatabaseManager::CreateDatabaseSchema()
+void DatabaseManager::createDatabaseSchema()
 {
-    QFile fScript(":/sql-scripts/db-schema.sql");
-    if (!fScript.open(QIODevice::ReadOnly))
+    QFile scriptFile(":/sql-scripts/db-schema.sql");
+    if (!scriptFile.open(QIODevice::ReadOnly))
     {
-        qWarning() << "Error opening db-schema script file:" << fScript.errorString();
+        qWarning() << "Error opening db-schema script file:" << scriptFile.errorString();
         return;
     }
 
     QSqlQuery query;
 
-    QStringList lsCommands = QTextStream(&fScript).readAll().split(';');
-    foreach (QString sCommand, lsCommands)
+    QStringList commandList = QTextStream(&scriptFile).readAll().split(';');
+    foreach (QString command, commandList)
     {
-        if (!sCommand.trimmed().isEmpty() && !query.exec(sCommand))
+        if (!command.trimmed().isEmpty() && !query.exec(command))
         {
             qWarning() << "Error executing query at method DatabaseManager::CreateDatabaseSchema:" << query.lastError();
             return;

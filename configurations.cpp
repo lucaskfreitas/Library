@@ -7,101 +7,101 @@
 #include <QFile>
 #include <QFileDialog>
 
-QString Configurations::GetDBPath()
+QString Configurations::getDBPath()
 {
-    QString sDBPath = ReadVariable("paths.conf", "DB_PATH");
+    QString dbPath = readVariable("paths.conf", "DB_PATH");
 
-    if (!sDBPath.isEmpty() && !QFile::exists(sDBPath)) //Invalid path
+    if (!dbPath.isEmpty() && !QFile::exists(dbPath)) //Invalid path
     {
-        sDBPath = "";
-        RemoveVariable("paths.conf", "DB_PATH");
+        dbPath = "";
+        removeVariable("paths.conf", "DB_PATH");
     }
 
-    if (sDBPath.isEmpty())
+    if (dbPath.isEmpty())
     {
-        sDBPath = AskForDBPath();
+        dbPath = askForDBPath();
 
-        if (!sDBPath.isEmpty())
-            WriteVariable("paths.conf", "DB_PATH", sDBPath);
+        if (!dbPath.isEmpty())
+            writeVariable("paths.conf", "DB_PATH", dbPath);
     }
 
-    return sDBPath;
+    return dbPath;
 }
 
-QFile* Configurations::GetConfigFile(QString aFilename)
+QFile* Configurations::getConfigFile(const QString filename)
 {
-    QString sAppDataDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-    QDir dir(sAppDataDir);
+    QString appDataDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+    QDir dir(appDataDir);
     if (!dir.exists())
-        dir.mkpath(sAppDataDir);
+        dir.mkpath(appDataDir);
 
-    return new QFile(sAppDataDir + "/" + aFilename);
+    return new QFile(appDataDir + "/" + filename);
 }
 
-QString Configurations::AskForDBPath()
+QString Configurations::askForDBPath()
 {
     QFileDialog dialog;
-    QString sSelectedFile = dialog.getSaveFileName(nullptr,
+    QString selectedFile = dialog.getSaveFileName(nullptr,
                                                    "Selecione o caminho do banco de dados...",
                                                    "db.sqlite",
                                                    "SQLITE database file (*.sqlite)",
                                                    nullptr,
                                                    QFileDialog::DontConfirmOverwrite);
 
-    if (!sSelectedFile.isEmpty() && !sSelectedFile.contains(".sqlite"))
-        sSelectedFile += ".sqlite";
+    if (!selectedFile.isEmpty() && !selectedFile.contains(".sqlite"))
+        selectedFile += ".sqlite";
 
-    return sSelectedFile;
+    return selectedFile;
 }
 
-QString Configurations::ReadVariable(QString aFilename, QString aVariableName)
+QString Configurations::readVariable(const QString filename, const QString variableName)
 {
-    QString sResult = "";
+    QString result = "";
 
-    QFile* fConfig = GetConfigFile(aFilename);
-    if (fConfig->open(QIODevice::ReadOnly | QIODevice::Text))
+    QFile* configFile = getConfigFile(filename);
+    if (configFile->open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        while (!fConfig->atEnd())
+        while (!configFile->atEnd())
         {
-            QString sConfigLine = fConfig->readLine();
-            if (sConfigLine.contains(aVariableName))
-                sResult = sConfigLine.split('=')[1].trimmed();
+            QString configLine = configFile->readLine();
+            if (configLine.contains(variableName))
+                result = configLine.split('=')[1].trimmed();
         }
 
-        fConfig->close();
+        configFile->close();
     }
 
-    return sResult;
+    return result;
 }
 
-void Configurations::WriteVariable(QString aFilename, QString aVariableName, QString aValue)
+void Configurations::writeVariable(const QString filename, const QString variableName, const QString value)
 {
-    QFile* fConfig = GetConfigFile(aFilename);
-    if (fConfig->open(QIODevice::WriteOnly | QIODevice::Text))
+    QFile* configFile = getConfigFile(filename);
+    if (configFile->open(QIODevice::WriteOnly | QIODevice::Text))
     {
-        QTextStream oStream(fConfig);
-        oStream << aVariableName << "=" << aValue << Qt::endl;
-        fConfig->close();
+        QTextStream stream(configFile);
+        stream << variableName << "=" << value << Qt::endl;
+        configFile->close();
     }
 }
 
-void Configurations::RemoveVariable(QString aFilename, QString aVariableName)
+void Configurations::removeVariable(const QString filename, const QString variableName)
 {
-    QFile* fConfig = GetConfigFile(aFilename);
-    if (fConfig->open(QIODevice::ReadWrite | QIODevice::Text))
+    QFile* configFile = getConfigFile(filename);
+    if (configFile->open(QIODevice::ReadWrite | QIODevice::Text))
     {
-        QTextStream oStream(fConfig);
-        QString sNewFileContents = "";
+        QTextStream stream(configFile);
+        QString newFileContents = "";
 
-        while (!fConfig->atEnd())
+        while (!configFile->atEnd())
         {
-            QString sConfigLine = fConfig->readLine();
-            if(!sConfigLine.contains(aVariableName))
-                sNewFileContents.append(sConfigLine + "\n");
+            QString configLine = configFile->readLine();
+            if(!configLine.contains(variableName))
+                newFileContents.append(configLine + "\n");
         }
 
-        fConfig->resize(0);
-        oStream << sNewFileContents;
-        fConfig->close();
+        configFile->resize(0);
+        stream << newFileContents;
+        configFile->close();
     }
 }

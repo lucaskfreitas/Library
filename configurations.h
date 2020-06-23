@@ -6,15 +6,15 @@
 
 class Configurations
 {
-public:
-    static QString GetDBPath();
+    public:
+        static QString getDBPath();
 
-private:
-    static QFile* GetConfigFile(QString aFilename);
-    static QString AskForDBPath();
-    static QString ReadVariable(QString aFilename, QString aVariableName);
-    static void WriteVariable(QString aFilename, QString aVariableName, QString aValue);
-    static void RemoveVariable(QString aFilename, QString aVariableName);
+    private:
+        static QFile* getConfigFile(const QString filename);
+        static QString askForDBPath();
+        static QString readVariable(const QString filename, const QString variableName);
+        static void writeVariable(const QString filename, const QString variableName, const QString value);
+        static void removeVariable(const QString filename, const QString variableName);
 };
 
 #endif // CONFIGURATIONS_H

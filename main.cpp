@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
 
     engine.load(url);
 
-    DatabaseManager::Connect(Configurations::GetDBPath());
-    DatabaseManager::VerifyDatabase();
+    DatabaseManager::connect(Configurations::getDBPath());
+    DatabaseManager::verifyDatabase();
 
     return app.exec();
 }

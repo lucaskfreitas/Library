@@ -3,58 +3,53 @@
 #include <QSqlQuery>
 #include <QVariant>
 
-DbRecord::DbRecord()
+void DbRecord::setTitle(const QString value)
 {
-
+    title = value;
 }
 
-void DbRecord::setTitle(QString aValue)
+QString DbRecord::getTitle()
 {
-    sTitle = aValue;
+    return title;
 }
 
-QString DbRecord::title()
+void DbRecord::setNumPages(const int value)
 {
-    return sTitle;
+    numPages = value;
 }
 
-void DbRecord::setNumPages(int aValue)
+int DbRecord::getNumPages()
 {
-    iNumPages = aValue;
+    return numPages;
 }
 
-int DbRecord::numPages()
+void DbRecord::setVolume(const QString value)
 {
-    return iNumPages;
+    volume = value;
 }
 
-void DbRecord::setVolume(QString aValue)
+QString DbRecord::getVolume()
 {
-    sVolume = aValue;
+    return volume;
 }
 
-QString DbRecord::volume()
+void DbRecord::setNumber(const int value)
 {
-    return sVolume;
+    number = value;
 }
 
-void DbRecord::setNumber(int aValue)
+int DbRecord::getNumber()
 {
-    iNumber = aValue;
-}
-
-int DbRecord::number()
-{
-    return iNumber;
+    return number;
 }
 
 void DbRecord::save()
 {
     QSqlQuery query;
-    query.prepare("insert into record (title, n_pages, volume, number) values (:title, :num_pages, :volume, :number)");
-    query.bindValue(":title", sTitle);
-    query.bindValue(":num_pages", iNumPages);
-    query.bindValue(":volume", sVolume);
-    query.bindValue(":number", iNumber);
+    query.prepare("insert into record (title, n_pages, volume, number) values (:title, :numPages, :volume, :number)");
+    query.bindValue(":title", title);
+    query.bindValue(":numPages", numPages);
+    query.bindValue(":volume", volume);
+    query.bindValue(":number", number);
     query.exec();
 }
