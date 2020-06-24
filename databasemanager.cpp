@@ -13,6 +13,8 @@ void DatabaseManager::connect(const QString databasePath)
         db.setDatabaseName(databasePath);
         if(!db.open())
             qWarning() << "Error connecting to the Database:" << db.lastError().text();
+        else
+            qDebug() << "Successfully connected to database " << databasePath;
     }
     else
         qWarning() << "No database path was informed!";
