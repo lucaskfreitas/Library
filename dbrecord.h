@@ -1,6 +1,8 @@
 #ifndef DBRECORD_H
 #define DBRECORD_H
 
+#include "dbperson.h"
+
 #include <QObject>
 
 class DbRecord : public QObject
@@ -15,6 +17,7 @@ class DbRecord : public QObject
     Q_PROPERTY(int copies READ getCopies WRITE setCopies NOTIFY copiesChanged)
     Q_PROPERTY(QString obs READ getObs WRITE setObs NOTIFY obsChanged)
     Q_PROPERTY(bool borrowed READ getBorrowed WRITE setBorrowed NOTIFY borrowedChanged)
+    Q_PROPERTY(QString borrowedTo READ getBorrowedTo WRITE setBorrowedTo NOTIFY borrowedToChanged)
 
     signals:
         void titleChanged();
@@ -25,6 +28,7 @@ class DbRecord : public QObject
         void copiesChanged();
         void obsChanged();
         void borrowedChanged();
+        void borrowedToChanged();
 
     public slots:
         void save();
@@ -38,6 +42,7 @@ class DbRecord : public QObject
         int copies = -1;
         QString obs = "";
         bool borrowed = false;
+        DbPerson borrowedTo;
 
         void setTitle(const QString value);
         void setNumPages(const int value);
@@ -47,6 +52,7 @@ class DbRecord : public QObject
         void setCopies(const int value);
         void setObs(const QString value);
         void setBorrowed(const bool value);
+        void setBorrowedTo(const QString person_name);
 
         QString getTitle();
         int getNumPages();
@@ -56,6 +62,7 @@ class DbRecord : public QObject
         int getCopies();
         QString getObs();
         bool getBorrowed();
+        QString getBorrowedTo();
 };
 
 #endif // DBRECORD_H

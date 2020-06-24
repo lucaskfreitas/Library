@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         configurations.cpp \
         databasemanager.cpp \
+        dbperson.cpp \
         dbrecord.cpp \
         main.cpp
 
@@ -40,4 +41,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     configurations.h \
     databasemanager.h \
+    dbperson.h \
     dbrecord.h

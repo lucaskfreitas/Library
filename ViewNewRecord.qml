@@ -288,6 +288,7 @@ Item {
                     visible: ckBorrowedItem.checked
                     Layout.fillWidth: true
                     placeholderText: "Para quem?"
+                    onFocusChanged: record.borrowedTo = edBorrowedToWhom.text
                 }
             }
 

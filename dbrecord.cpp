@@ -83,10 +83,28 @@ bool DbRecord::getBorrowed()
     return borrowed;
 }
 
+void DbRecord::setBorrowedTo(const QString person_name)
+{
+    if (person_name.isEmpty())
+        return;
+
+    if (!borrowedTo.loadByName(person_name))
+    {
+        borrowedTo.setIsAuthor(false);
+        borrowedTo.setName(person_name);
+        borrowedTo.save();
+    }
+}
+
+QString DbRecord::getBorrowedTo()
+{
+    return borrowedTo.getName();
+}
+
 void DbRecord::save()
 {
     QSqlQuery query;
-    query.prepare("insert into record (title, n_pages, volume, number, reference_number, copies, obs, borrowed) values (:title, :numPages, :volume, :number, :referenceNumber, :copies, :obs, :borrowed)");
+    query.prepare("insert into record (title, n_pages, volume, number, reference_number, copies, obs, borrowed, borrowed_to) values (:title, :numPages, :volume, :number, :referenceNumber, :copies, :obs, :borrowed, :borrowedTo)");
     query.bindValue(":title", title);
     query.bindValue(":numPages", numPages);
     query.bindValue(":volume", volume);
@@ -95,5 +113,6 @@ void DbRecord::save()
     query.bindValue(":copies", copies);
     query.bindValue(":obs", obs);
     query.bindValue(":borrowed", borrowed);
+    query.bindValue(":borrowedTo", borrowedTo.getId());
     query.exec();
 }
