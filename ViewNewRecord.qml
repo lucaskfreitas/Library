@@ -196,8 +196,10 @@ Item {
                 }
 
                 CustomTextField {
+                    id: edReferenceNumber
                     Layout.fillWidth: true
                     placeholderText: "Insira o número de chamada (para catálogo sistemático)"
+                    onTextChanged: record.referenceNumber = edReferenceNumber.text
                 }
             }
 
@@ -241,9 +243,11 @@ Item {
                 }
 
                 CustomTextField {
+                    id: edCopies
                     Layout.fillWidth: true
                     validator: IntValidator{}
                     placeholderText: "Insira o número de exemplares"
+                    onTextChanged: record.copies = edCopies.text
                 }
             }
 
@@ -258,8 +262,10 @@ Item {
                 }
 
                 CustomTextField {
+                    id: edObs
                     Layout.fillWidth: true
                     placeholderText: "Insira uma observação"
+                    onTextChanged: record.obs = edObs.text
                 }
             }
 
@@ -270,6 +276,11 @@ Item {
                     id: ckBorrowedItem
                     Layout.preferredWidth: txtReferenceNumber.width
                     text: "Emprestado"
+                    onToggled: {
+                        if (!ckBorrowedItem.checked)
+                            edBorrowedToWhom.text = ""
+                        record.borrowed = ckBorrowedItem.checked
+                    }
                 }
 
                 CustomTextField {
