@@ -18,6 +18,9 @@ class DbRecord : public QObject
     Q_PROPERTY(QString obs READ getObs WRITE setObs NOTIFY obsChanged)
     Q_PROPERTY(bool borrowed READ getBorrowed WRITE setBorrowed NOTIFY borrowedChanged)
     Q_PROPERTY(QString borrowedTo READ getBorrowedTo WRITE setBorrowedTo NOTIFY borrowedToChanged)
+    Q_PROPERTY(int day READ getDay WRITE setDay NOTIFY dayChanged)
+    Q_PROPERTY(int month READ getMonth WRITE setMonth NOTIFY monthChanged)
+    Q_PROPERTY(int year READ getYear WRITE setYear NOTIFY yearChanged)
 
     signals:
         void titleChanged();
@@ -29,6 +32,9 @@ class DbRecord : public QObject
         void obsChanged();
         void borrowedChanged();
         void borrowedToChanged();
+        void dayChanged();
+        void monthChanged();
+        void yearChanged();
 
     public slots:
         void save();
@@ -43,6 +49,9 @@ class DbRecord : public QObject
         QString obs = "";
         bool borrowed = false;
         DbPerson borrowedTo;
+        int day;
+        int month;
+        int year;
 
         void setTitle(const QString value);
         void setNumPages(const int value);
@@ -53,6 +62,9 @@ class DbRecord : public QObject
         void setObs(const QString value);
         void setBorrowed(const bool value);
         void setBorrowedTo(const QString person_name);
+        void setDay(const int value);
+        void setMonth(const int value);
+        void setYear(const int value);
 
         QString getTitle();
         int getNumPages();
@@ -63,6 +75,9 @@ class DbRecord : public QObject
         QString getObs();
         bool getBorrowed();
         QString getBorrowedTo();
+        int getDay();
+        int getMonth();
+        int getYear();
 };
 
 #endif // DBRECORD_H

@@ -111,13 +111,34 @@ Item {
                 }
 
                 CustomTextField {
+                    id: edDay
+                    Layout.preferredWidth: 40
+                    validator: IntValidator{}
+                    maximumLength: 2
+                    onTextChanged: record.day = edDay.text
+                }
+
+                CustomTextField {
+                    id: edMonth
+                    Layout.preferredWidth: 40
+                    validator: IntValidator{}
+                    maximumLength: 2
+                    onTextChanged: record.month = edMonth.text
+                }
+
+                CustomTextField {
+                    id: edYear
+                    Layout.preferredWidth: 60
+                    validator: IntValidator{}
+                    maximumLength: 4
+                    onTextChanged: record.year = edYear.text
+                }
+
+                Item {
                     Layout.fillWidth: true
-                    placeholderText: "Insira a data de publicação"
-                    inputMask: "99/99/9999;_"
                 }
 
                 Text {
-                    Layout.leftMargin: 50
                     verticalAlignment: Text.AlignVCenter
                     Layout.preferredWidth: txtReferenceNumber.width
                     font: styles.mainFont
@@ -126,7 +147,7 @@ Item {
 
                 CustomTextField {
                     id: edNumPages
-                    Layout.fillWidth: true
+                    Layout.preferredWidth: edNumber.width
                     validator: IntValidator{}
                     placeholderText: "Insira o número total de páginas"
                     onTextChanged: record.numPages = edNumPages.text

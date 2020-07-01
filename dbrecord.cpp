@@ -101,11 +101,44 @@ QString DbRecord::getBorrowedTo()
     return borrowedTo.getName();
 }
 
+void DbRecord::setDay(const int value)
+{
+    day = value;
+}
+
+int DbRecord::getDay()
+{
+    return day;
+}
+
+void DbRecord::setMonth(const int value)
+{
+    month = value;
+}
+
+int DbRecord::getMonth()
+{
+    return month;
+}
+
+void DbRecord::setYear(const int value)
+{
+    year = value;
+}
+
+int DbRecord::getYear()
+{
+    return year;
+}
+
 void DbRecord::save()
 {
     QSqlQuery query;
-    query.prepare("insert into record (title, n_pages, volume, number, reference_number, copies, obs, borrowed, borrowed_to) values (:title, :numPages, :volume, :number, :referenceNumber, :copies, :obs, :borrowed, :borrowedTo)");
+    query.prepare("insert into record (title, day, month, year, n_pages, volume, number, reference_number, copies, obs, borrowed, borrowed_to) values (:title, :day, :month, :year, :numPages, :volume, :number, :referenceNumber, :copies, :obs, :borrowed, :borrowedTo)");
     query.bindValue(":title", title);
+    query.bindValue(":day", day);
+    query.bindValue(":month", month);
+    query.bindValue(":year", year);
     query.bindValue(":numPages", numPages);
     query.bindValue(":volume", volume);
     query.bindValue(":number", number);
