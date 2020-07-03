@@ -40,7 +40,7 @@ void RecordTypeDb::save()
     query.bindValue(":name", this->name);
     query.exec();
 
-    loadByName(this->name);
+    load(query.lastInsertId().toInt());
 }
 
 bool RecordTypeDb::load(const int type_id)
@@ -48,23 +48,6 @@ bool RecordTypeDb::load(const int type_id)
     QSqlQuery query;
     query.prepare("select id, name from record_type where id = :id");
     query.bindValue(":id", type_id);
-    query.exec();
-
-    if (query.next())
-    {
-        this->id = query.value(0).toInt();
-        this->name = query.value(1).toString();
-        return true;
-    }
-    else
-        return false;
-}
-
-bool RecordTypeDb::loadByName(const QString name)
-{
-    QSqlQuery query;
-    query.prepare("select id, name from record_type where name = :name");
-    query.bindValue(":name", name);
     query.exec();
 
     if (query.next())

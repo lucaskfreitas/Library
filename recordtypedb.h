@@ -13,7 +13,6 @@ class RecordTypeDb : public QObject
     public:
         void save();
         bool load(const int type_id);
-        bool loadByName(const QString name);
 
         int getId();
         void setId(int name);
