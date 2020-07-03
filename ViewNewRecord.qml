@@ -30,7 +30,7 @@ Item {
 
                 ComboBox {
                     Layout.fillWidth: true
-                    model: [ "Livro autoral", "Livro organizado", "Revista", "Anais de evento", "Catálogo", "Dicionário", "Quadrinhos", "Monografia", "Dissertação", "Tese", "Atlas", "Outro" ]
+                    model: recordTypeComboModel.comboList
                 }
             }
 

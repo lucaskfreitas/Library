@@ -18,7 +18,8 @@ SOURCES += \
         databasemanager.cpp \
         main.cpp \
         persondb.cpp \
-        recorddb.cpp
+        recorddb.cpp \
+        recordtypecombobox.cpp
 
 RESOURCES += qml.qrc
 RESOURCES += qtquickcontrols2.conf
@@ -42,4 +43,5 @@ HEADERS += \
     configurations.h \
     databasemanager.h \
     persondb.h \
-    recorddb.h
+    recorddb.h \
+    recordtypecombobox.h

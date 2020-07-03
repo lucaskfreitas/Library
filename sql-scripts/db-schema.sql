@@ -1,4 +1,4 @@
-pragma user_version = 1;
+﻿pragma user_version = 1;
 
 create table person
 (
@@ -42,6 +42,19 @@ create table record_type
     id integer primary key autoincrement,
     name nvarchar(100)
 );
+
+insert into record_type (name) values
+    ('Livro autoral'),
+    ('Livro organizado'),
+    ('Revista'),
+    ('Anais de evento'),
+    ('Catálogo'),
+    ('Dicionário'),
+    ('Quadrinhos'),
+    ('Monografia'),
+    ('Dissertação'),
+    ('Tese'),
+    ('Atlas');
 
 create table record
 (
