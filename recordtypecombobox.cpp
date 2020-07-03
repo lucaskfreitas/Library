@@ -5,17 +5,23 @@
 
 RecordTypeComboBox::RecordTypeComboBox()
 {
-    QSqlQuery query("select name from record_type");
+    QSqlQuery query("select id, name from record_type");
     while (query.next())
-        this->comboList << query.value(0).toString();
+    {
+        RecordTypeDb *recordType = new RecordTypeDb();
+        recordType->setId(query.value(0).toInt());
+        recordType->setName(query.value(1).toString());
+
+        this->comboList.append(recordType);
+    }
 }
 
-const QStringList RecordTypeComboBox::getComboList()
+const QList<RecordTypeDb*> RecordTypeComboBox::getComboList()
 {
     return this->comboList;
 }
 
-void RecordTypeComboBox::setComboList(const QStringList &comboList)
+void RecordTypeComboBox::setComboList(const QList<RecordTypeDb*> &comboList)
 {
     if (this->comboList != comboList)
     {

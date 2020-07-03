@@ -1,13 +1,15 @@
 #ifndef RECORDTYPECOMBOBOX_H
 #define RECORDTYPECOMBOBOX_H
 
+#include "recordtypedb.h"
+
 #include <QObject>
 
 class RecordTypeComboBox : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QStringList comboList READ getComboList WRITE setComboList NOTIFY comboListChanged)
+    Q_PROPERTY(QList<RecordTypeDb*> comboList READ getComboList WRITE setComboList NOTIFY comboListChanged)
 
     public:
         RecordTypeComboBox();
@@ -16,9 +18,9 @@ class RecordTypeComboBox : public QObject
         void comboListChanged();
 
     private:
-        const QStringList getComboList();
-        void setComboList(const QStringList &comboList);
-        QStringList comboList;
+        const QList<RecordTypeDb*> getComboList();
+        void setComboList(const QList<RecordTypeDb*> &comboList);
+        QList<RecordTypeDb*> comboList;
 };
 
 #endif // RECORDTYPECOMBOBOX_H

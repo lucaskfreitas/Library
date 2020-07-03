@@ -30,6 +30,8 @@ Item {
 
                 ComboBox {
                     Layout.fillWidth: true
+                    valueRole: "id"
+                    textRole: "name"
                     model: recordTypeComboModel.comboList
                 }
             }
