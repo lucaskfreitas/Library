@@ -29,10 +29,13 @@ Item {
                 }
 
                 ComboBox {
+                    id: cbType
                     Layout.fillWidth: true
                     valueRole: "id"
                     textRole: "name"
                     model: recordTypeComboModel.comboList
+
+                    onCurrentIndexChanged: record.type = recordTypeComboModel.comboList[cbType.currentIndex].id
                 }
             }
 

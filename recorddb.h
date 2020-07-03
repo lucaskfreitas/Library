@@ -2,6 +2,7 @@
 #define DBRECORD_H
 
 #include "persondb.h"
+#include "recordtypedb.h"
 
 #include <QObject>
 
@@ -21,6 +22,7 @@ class RecordDb : public QObject
     Q_PROPERTY(int day READ getDay WRITE setDay NOTIFY dayChanged)
     Q_PROPERTY(int month READ getMonth WRITE setMonth NOTIFY monthChanged)
     Q_PROPERTY(int year READ getYear WRITE setYear NOTIFY yearChanged)
+    Q_PROPERTY(int type READ getType WRITE setType NOTIFY typeChanged)
 
     signals:
         void titleChanged();
@@ -35,6 +37,7 @@ class RecordDb : public QObject
         void dayChanged();
         void monthChanged();
         void yearChanged();
+        void typeChanged();
 
     public slots:
         void save();
@@ -52,6 +55,7 @@ class RecordDb : public QObject
         int day;
         int month;
         int year;
+        RecordTypeDb type;
 
         void setTitle(const QString value);
         void setNumPages(const int value);
@@ -65,6 +69,7 @@ class RecordDb : public QObject
         void setDay(const int value);
         void setMonth(const int value);
         void setYear(const int value);
+        void setType(const int type_id);
 
         QString getTitle();
         int getNumPages();
@@ -78,6 +83,7 @@ class RecordDb : public QObject
         int getDay();
         int getMonth();
         int getYear();
+        int getType();
 };
 
 #endif // DBRECORD_H

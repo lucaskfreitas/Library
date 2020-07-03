@@ -131,11 +131,26 @@ int RecordDb::getYear()
     return year;
 }
 
+int RecordDb::getType()
+{
+    return type.getId();
+}
+
+void RecordDb::setType(const int type_id)
+{
+    if (type_id == 0)
+        return;
+
+    if (!type.load(type_id))
+        type.save();
+}
+
 void RecordDb::save()
 {
     QSqlQuery query;
-    query.prepare("insert into record (title, day, month, year, n_pages, volume, number, reference_number, copies, obs, borrowed, borrowed_to) values (:title, :day, :month, :year, :numPages, :volume, :number, :referenceNumber, :copies, :obs, :borrowed, :borrowedTo)");
+    query.prepare("insert into record (title, type_id, day, month, year, n_pages, volume, number, reference_number, copies, obs, borrowed, borrowed_to) values (:title, :type_id, :day, :month, :year, :numPages, :volume, :number, :referenceNumber, :copies, :obs, :borrowed, :borrowedTo)");
     query.bindValue(":title", title);
+    query.bindValue(":type_id", type.getId());
     query.bindValue(":day", day);
     query.bindValue(":month", month);
     query.bindValue(":year", year);

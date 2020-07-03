@@ -11,7 +11,9 @@ class RecordTypeDb : public QObject
     Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged)
 
     public:
-        RecordTypeDb();
+        void save();
+        bool load(const int type_id);
+        bool loadByName(const QString name);
 
         int getId();
         void setId(int name);
