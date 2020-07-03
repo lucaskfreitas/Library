@@ -1,6 +1,6 @@
 #include "databasemanager.h"
 #include "configurations.h"
-#include "dbrecord.h"
+#include "recorddb.h"
 
 #include <QApplication>
 #include <QQmlApplicationEngine>
@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
 
-    qmlRegisterType<DbRecord>("org.database", 1, 0, "DbRecord");
+    qmlRegisterType<RecordDb>("org.database", 1, 0, "RecordDb");
 
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

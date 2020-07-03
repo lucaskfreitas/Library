@@ -1,11 +1,11 @@
 #ifndef DBRECORD_H
 #define DBRECORD_H
 
-#include "dbperson.h"
+#include "persondb.h"
 
 #include <QObject>
 
-class DbRecord : public QObject
+class RecordDb : public QObject
 {
     Q_OBJECT
 
@@ -48,7 +48,7 @@ class DbRecord : public QObject
         int copies = -1;
         QString obs = "";
         bool borrowed = false;
-        DbPerson borrowedTo;
+        PersonDb borrowedTo;
         int day;
         int month;
         int year;

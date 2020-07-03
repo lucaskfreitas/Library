@@ -5,7 +5,7 @@ import QtQuick.Controls 2.5
 import org.database 1.0
 
 Item {
-    DbRecord {
+    RecordDb {
         id: record
     }
 

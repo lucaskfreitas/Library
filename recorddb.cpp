@@ -1,89 +1,89 @@
-#include "dbrecord.h"
+#include "recorddb.h"
 
 #include <QSqlQuery>
 #include <QVariant>
 
-void DbRecord::setTitle(const QString value)
+void RecordDb::setTitle(const QString value)
 {
     title = value;
 }
 
-QString DbRecord::getTitle()
+QString RecordDb::getTitle()
 {
     return title;
 }
 
-void DbRecord::setNumPages(const int value)
+void RecordDb::setNumPages(const int value)
 {
     numPages = value;
 }
 
-int DbRecord::getNumPages()
+int RecordDb::getNumPages()
 {
     return numPages;
 }
 
-void DbRecord::setVolume(const QString value)
+void RecordDb::setVolume(const QString value)
 {
     volume = value;
 }
 
-QString DbRecord::getVolume()
+QString RecordDb::getVolume()
 {
     return volume;
 }
 
-void DbRecord::setNumber(const int value)
+void RecordDb::setNumber(const int value)
 {
     number = value;
 }
 
-int DbRecord::getNumber()
+int RecordDb::getNumber()
 {
     return number;
 }
 
-void DbRecord::setReferenceNumber(const QString value)
+void RecordDb::setReferenceNumber(const QString value)
 {
     referenceNumber = value;
 }
 
-QString DbRecord::getReferenceNumber()
+QString RecordDb::getReferenceNumber()
 {
     return referenceNumber;
 }
 
-void DbRecord::setCopies(const int value)
+void RecordDb::setCopies(const int value)
 {
     copies = value;
 }
 
-int DbRecord::getCopies()
+int RecordDb::getCopies()
 {
     return copies;
 }
 
-void DbRecord::setObs(const QString value)
+void RecordDb::setObs(const QString value)
 {
     obs = value;
 }
 
-QString DbRecord::getObs()
+QString RecordDb::getObs()
 {
     return obs;
 }
 
-void DbRecord::setBorrowed(const bool value)
+void RecordDb::setBorrowed(const bool value)
 {
     borrowed = value;
 }
 
-bool DbRecord::getBorrowed()
+bool RecordDb::getBorrowed()
 {
     return borrowed;
 }
 
-void DbRecord::setBorrowedTo(const QString person_name)
+void RecordDb::setBorrowedTo(const QString person_name)
 {
     if (person_name.isEmpty())
         return;
@@ -96,42 +96,42 @@ void DbRecord::setBorrowedTo(const QString person_name)
     }
 }
 
-QString DbRecord::getBorrowedTo()
+QString RecordDb::getBorrowedTo()
 {
     return borrowedTo.getName();
 }
 
-void DbRecord::setDay(const int value)
+void RecordDb::setDay(const int value)
 {
     day = value;
 }
 
-int DbRecord::getDay()
+int RecordDb::getDay()
 {
     return day;
 }
 
-void DbRecord::setMonth(const int value)
+void RecordDb::setMonth(const int value)
 {
     month = value;
 }
 
-int DbRecord::getMonth()
+int RecordDb::getMonth()
 {
     return month;
 }
 
-void DbRecord::setYear(const int value)
+void RecordDb::setYear(const int value)
 {
     year = value;
 }
 
-int DbRecord::getYear()
+int RecordDb::getYear()
 {
     return year;
 }
 
-void DbRecord::save()
+void RecordDb::save()
 {
     QSqlQuery query;
     query.prepare("insert into record (title, day, month, year, n_pages, volume, number, reference_number, copies, obs, borrowed, borrowed_to) values (:title, :day, :month, :year, :numPages, :volume, :number, :referenceNumber, :copies, :obs, :borrowed, :borrowedTo)");

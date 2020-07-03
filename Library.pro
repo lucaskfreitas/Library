@@ -16,9 +16,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         configurations.cpp \
         databasemanager.cpp \
-        dbperson.cpp \
-        dbrecord.cpp \
-        main.cpp
+        main.cpp \
+        persondb.cpp \
+        recorddb.cpp
 
 RESOURCES += qml.qrc
 RESOURCES += qtquickcontrols2.conf
@@ -41,5 +41,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     configurations.h \
     databasemanager.h \
-    dbperson.h \
-    dbrecord.h
+    persondb.h \
+    recorddb.h

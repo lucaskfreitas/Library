@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-class DbPerson : QObject
+class PersonDb : QObject
 {
     Q_OBJECT
 

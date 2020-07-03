@@ -1,34 +1,34 @@
-#include "dbperson.h"
+#include "persondb.h"
 
 #include <QSqlQuery>
 #include <QVariant>
 
-int DbPerson::getId()
+int PersonDb::getId()
 {
     return id;
 }
 
-void DbPerson::setName(const QString value)
+void PersonDb::setName(const QString value)
 {
     name = value;
 }
 
-QString DbPerson::getName()
+QString PersonDb::getName()
 {
     return name;
 }
 
-bool DbPerson::getIsAuthor()
+bool PersonDb::getIsAuthor()
 {
     return isAuthor;
 }
 
-void DbPerson::setIsAuthor(const bool value)
+void PersonDb::setIsAuthor(const bool value)
 {
     isAuthor = value;
 }
 
-void DbPerson::save()
+void PersonDb::save()
 {
     QSqlQuery query;
     query.prepare("insert into person (name, is_author) values (:name, :isAuthor)");
@@ -39,7 +39,7 @@ void DbPerson::save()
     loadByName(name);
 }
 
-bool DbPerson::loadByName(const QString name)
+bool PersonDb::loadByName(const QString name)
 {
     QSqlQuery query;
     query.prepare("select id, name from person where name = :name");
