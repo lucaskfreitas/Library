@@ -23,6 +23,7 @@ class RecordDb : public QObject
     Q_PROPERTY(int month READ getMonth WRITE setMonth NOTIFY monthChanged)
     Q_PROPERTY(int year READ getYear WRITE setYear NOTIFY yearChanged)
     Q_PROPERTY(int type READ getType WRITE setType NOTIFY typeChanged)
+    Q_PROPERTY(QString authors READ getAuthors WRITE setAuthors NOTIFY authorsChanged)
 
     signals:
         void titleChanged();
@@ -38,11 +39,13 @@ class RecordDb : public QObject
         void monthChanged();
         void yearChanged();
         void typeChanged();
+        void authorsChanged();
 
     public slots:
         void save();
 
     private:
+        int id = -1;
         QString title = "";
         int numPages = -1;
         QString volume = "";
@@ -56,6 +59,7 @@ class RecordDb : public QObject
         int month;
         int year;
         RecordTypeDb type;
+        QString authors;
 
         void setTitle(const QString value);
         void setNumPages(const int value);
@@ -70,6 +74,7 @@ class RecordDb : public QObject
         void setMonth(const int value);
         void setYear(const int value);
         void setType(const int type_id);
+        void setAuthors(const QString author_names);
 
         QString getTitle();
         int getNumPages();
@@ -84,6 +89,7 @@ class RecordDb : public QObject
         int getMonth();
         int getYear();
         int getType();
+        QString getAuthors();
 };
 
 #endif // DBRECORD_H

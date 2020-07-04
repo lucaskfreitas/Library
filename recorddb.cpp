@@ -145,6 +145,25 @@ void RecordDb::setType(const int type_id)
         type.save();
 }
 
+void RecordDb::setAuthors(const QString author_names)
+{
+    authors = author_names;
+}
+
+QString RecordDb::getAuthors()
+{
+    return authors;
+    /*QString result = "";
+    for (PersonDb* author : this->authors)
+    {
+        if (!result.isEmpty())
+            result += "; ";
+        result += author->getName();
+    }
+
+    return result;*/
+}
+
 void RecordDb::save()
 {
     QSqlQuery query;
@@ -163,4 +182,23 @@ void RecordDb::save()
     query.bindValue(":borrowed", borrowed);
     query.bindValue(":borrowedTo", borrowedTo.getId());
     query.exec();
+    this->id = query.lastInsertId().toInt();
+
+    //Authors
+    query.prepare("insert into record_author (record_id, author_id) values (:record_id, :author_id)");
+    query.bindValue(":record_id", this->id);
+
+    for (QString author_name : this->authors.split(QLatin1Char(';')))
+    {
+        PersonDb author;
+        if (!author.loadByName(author_name))
+        {
+            author.setName(author_name.trimmed());
+            author.setIsAuthor(true);
+            author.save();
+        }
+
+        query.bindValue(":author_id", author.getId());
+        query.exec();
+    }
 }

@@ -50,8 +50,10 @@ Item {
                 }
 
                 CustomTextField {
+                    id: edAuthors
                     Layout.fillWidth: true
                     placeholderText: "Insira o autor (SOBRENOME, Nome) - separar com ponto e vírgula caso houver mais do que um"
+                    onFocusChanged: record.authors = edAuthors.text
                 }
             }
 
