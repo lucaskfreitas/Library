@@ -2,6 +2,7 @@
 #include "configurations.h"
 #include "recorddb.h"
 #include "recordtypecombobox.h"
+#include "languagecombobox.h"
 
 #include <QApplication>
 #include <QQmlApplicationEngine>
@@ -33,6 +34,7 @@ int main(int argc, char *argv[])
     //Custom types
     qmlRegisterType<RecordDb>("org.database", 1, 0, "RecordDb");
     engine.rootContext()->setContextProperty("recordTypeComboModel", new RecordTypeComboBox);
+    engine.rootContext()->setContextProperty("languageComboModel", new LanguageComboBox);
 
     engine.load(url);
 

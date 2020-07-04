@@ -37,6 +37,12 @@ create table language
     name nvarchar(100)
 );
 
+insert into language (name) values
+	('Português'),
+	('Inglês'),
+	('Espanhol'),
+	('Francês');
+
 create table record_type
 (
     id integer primary key autoincrement,
@@ -72,8 +78,10 @@ create table record
     obs nvarchar(500),
     borrowed boolean,
     borrowed_to integer,
-    foreign key (type_id) references record_type (id)
-    foreign key (borrowed_to) references person (id)
+    language_id integer,
+    foreign key (type_id) references record_type (id),
+    foreign key (borrowed_to) references person (id),
+    foreign key (language_id) references language (id)
 );
 
 create table record_author
@@ -119,13 +127,4 @@ create table record_subject
     foreign key (record_id) references record (id),
     foreign key (subject_id) references subject (id),
     primary key (record_id, subject_id)
-);
-
-create table record_language
-(
-    record_id integer,
-    language_id integer,
-    foreign key (record_id) references record (id),
-    foreign key (language_id) references language (id),
-    primary key (record_id, language_id)
 );

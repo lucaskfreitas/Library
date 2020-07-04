@@ -164,10 +164,24 @@ QString RecordDb::getAuthors()
     return result;*/
 }
 
+int RecordDb::getLanguage()
+{
+    return language.getId();
+}
+
+void RecordDb::setLanguage(const int language_id)
+{
+    if (language_id == 0)
+        return;
+
+    if (!language.load(language_id))
+        language.save();
+}
+
 void RecordDb::save()
 {
     QSqlQuery query;
-    query.prepare("insert into record (title, type_id, day, month, year, n_pages, volume, number, reference_number, copies, obs, borrowed, borrowed_to) values (:title, :type_id, :day, :month, :year, :numPages, :volume, :number, :referenceNumber, :copies, :obs, :borrowed, :borrowedTo)");
+    query.prepare("insert into record (title, type_id, day, month, year, n_pages, volume, number, reference_number, copies, obs, borrowed, borrowed_to, language_id) values (:title, :type_id, :day, :month, :year, :numPages, :volume, :number, :referenceNumber, :copies, :obs, :borrowed, :borrowedTo, :language_id)");
     query.bindValue(":title", title);
     query.bindValue(":type_id", type.getId());
     query.bindValue(":day", day);
@@ -181,6 +195,7 @@ void RecordDb::save()
     query.bindValue(":obs", obs);
     query.bindValue(":borrowed", borrowed);
     query.bindValue(":borrowedTo", borrowedTo.getId());
+    query.bindValue(":language_id", language.getId());
     query.exec();
     this->id = query.lastInsertId().toInt();
 

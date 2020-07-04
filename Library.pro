@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         configurations.cpp \
         databasemanager.cpp \
+        languagecombobox.cpp \
+        languagedb.cpp \
         main.cpp \
         persondb.cpp \
         recorddb.cpp \
@@ -43,6 +45,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     configurations.h \
     databasemanager.h \
+    languagecombobox.h \
+    languagedb.h \
     persondb.h \
     recorddb.h \
     recordtypecombobox.h \

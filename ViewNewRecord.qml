@@ -34,7 +34,6 @@ Item {
                     valueRole: "id"
                     textRole: "name"
                     model: recordTypeComboModel.comboList
-
                     onCurrentIndexChanged: record.type = recordTypeComboModel.comboList[cbType.currentIndex].id
                 }
             }
@@ -258,8 +257,12 @@ Item {
                 }
 
                 ComboBox {
+                    id: cbLanguage
                     Layout.preferredWidth: edVolume.width
-                    model: [ "Português", "Inglês", "Espanhol", "Francês", "Outros" ]
+                    valueRole: "id"
+                    textRole: "name"
+                    model: languageComboModel.comboList
+                    onCurrentIndexChanged: record.language = languageComboModel.comboList[cbLanguage.currentIndex].id
                 }
 
                 Text {

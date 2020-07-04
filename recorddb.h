@@ -3,6 +3,7 @@
 
 #include "persondb.h"
 #include "recordtypedb.h"
+#include "languagedb.h"
 
 #include <QObject>
 
@@ -24,6 +25,7 @@ class RecordDb : public QObject
     Q_PROPERTY(int year READ getYear WRITE setYear NOTIFY yearChanged)
     Q_PROPERTY(int type READ getType WRITE setType NOTIFY typeChanged)
     Q_PROPERTY(QString authors READ getAuthors WRITE setAuthors NOTIFY authorsChanged)
+    Q_PROPERTY(int language READ getLanguage WRITE setLanguage NOTIFY languageChanged)
 
     signals:
         void titleChanged();
@@ -40,6 +42,7 @@ class RecordDb : public QObject
         void yearChanged();
         void typeChanged();
         void authorsChanged();
+        void languageChanged();
 
     public slots:
         void save();
@@ -60,6 +63,7 @@ class RecordDb : public QObject
         int year;
         RecordTypeDb type;
         QString authors;
+        LanguageDb language;
 
         void setTitle(const QString value);
         void setNumPages(const int value);
@@ -75,6 +79,7 @@ class RecordDb : public QObject
         void setYear(const int value);
         void setType(const int type_id);
         void setAuthors(const QString author_names);
+        void setLanguage(const int language_id);
 
         QString getTitle();
         int getNumPages();
@@ -90,6 +95,7 @@ class RecordDb : public QObject
         int getYear();
         int getType();
         QString getAuthors();
+        int getLanguage();
 };
 
 #endif // DBRECORD_H

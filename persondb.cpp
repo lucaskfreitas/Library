@@ -42,7 +42,7 @@ void PersonDb::save()
 bool PersonDb::loadByName(const QString name)
 {
     QSqlQuery query;
-    query.prepare("select id, name from person where name = :name");
+    query.prepare("select id, name, is_author from person where name = :name");
     query.bindValue(":name", name);
     query.exec();
 
@@ -50,6 +50,7 @@ bool PersonDb::loadByName(const QString name)
     {
         this->id = query.value(0).toInt();
         this->name = query.value(1).toString();
+        this->isAuthor = query.value(2).toBool();
         return true;
     }
     else
