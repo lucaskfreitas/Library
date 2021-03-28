@@ -14,12 +14,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        configurations.cpp \
         databasemanager.cpp \
         languagecombobox.cpp \
         languagedb.cpp \
         main.cpp \
         persondb.cpp \
+        programsettings.cpp \
         recorddb.cpp \
         recordtypecombobox.cpp \
         recordtypedb.cpp
@@ -27,7 +27,7 @@ SOURCES += \
 RESOURCES += qml.qrc
 RESOURCES += qtquickcontrols2.conf
 
-QT += sql widgets
+QT += sql widgets core
 
 RC_ICONS = images/icon.ico
 
@@ -43,11 +43,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    configurations.h \
     databasemanager.h \
     languagecombobox.h \
     languagedb.h \
     persondb.h \
+    programsettings.h \
     recorddb.h \
     recordtypecombobox.h \
     recordtypedb.h

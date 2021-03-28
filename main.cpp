@@ -1,5 +1,5 @@
 #include "databasemanager.h"
-#include "configurations.h"
+#include "programsettings.h"
 #include "recorddb.h"
 #include "recordtypecombobox.h"
 #include "languagecombobox.h"
@@ -10,8 +10,6 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
     QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
@@ -27,8 +25,10 @@ int main(int argc, char *argv[])
                      },
                      Qt::QueuedConnection);
 
+    ProgramSettings settings;
+
     //Database manager
-    DatabaseManager::connect(Configurations::getDBPath());
+    DatabaseManager::connect(settings.getDBPath());
     DatabaseManager::verifyDatabase();
 
     //Custom types
